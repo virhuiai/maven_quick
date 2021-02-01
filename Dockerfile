@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-8-slim
+FROM maven:3.6.3-jdk-11-slim
 # apt update 加速
 RUN echo '# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释' > /etc/apt/sources.list && \
 echo 'deb https://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free' >> /etc/apt/sources.list && \
@@ -21,15 +21,10 @@ set -eux; \
 	rm -rf /var/lib/apt/lists/* && \
   apt-get clean
 COPY ./settings-aliyun.xml /usr/share/maven/conf/settings.xml
-# docker build . -t maven_quick_tmp
-# docker run -itd --rm --name maven-tmp maven_quick_tmp /bin/bash
-# docker exec -it maven-tmp /bin/sh;
-# updatedb
-# locate settings.xml
-# /usr/share/maven/conf/settings.xml
-# # locate .m2
-# /root/.m2
-# /root/.m2/copy_reference_file.log
-# /root/.m2/repository
-# /root/.m2/settings-docker.xml
-# docker cp maven-tmp:/usr/share/maven/conf/settings.xml ./
+
+# docker run -it --rm --name maven_quick_tmp \
+# -v "$HOME/.m2/repository":/root/.m2/repository \
+# -v "$PWD":/usr/src/mymaven \
+# -w /usr/src/mymaven \
+# virhuiai/maven_quick:aliyun-3.6.3-11  \
+# mvn compile

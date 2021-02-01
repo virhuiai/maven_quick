@@ -1,3 +1,15 @@
+# aliyun-3.6.3-11
+
+```shell
+docker run -it --rm --name maven_quick_tmp \
+-v "$HOME/.m2/repository":/root/.m2/repository \
+-v "$PWD":/usr/src/mymaven \
+-w /usr/src/mymaven \
+virhuiai/maven_quick:aliyun-3.6.3-11  \
+mvn compile
+```
+
+
 # maven_quick
 mavn仓库，配置加速镜像
 
@@ -38,7 +50,7 @@ $ docker run -it -v maven-repo:/root/.m2 virhuiai/maven_quick:latest mvn archety
 
 
 ```
-$ docker run -it --rm -v "$PWD":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -v "$PWD/target:/usr/src/mymaven/target" -w /usr/src/mymaven virhuiai/maven_quick:latest mvn clean package  
+$ docker run -it --rm -v "$PWD":/usr/src/mymaven -v "$HOME/.m2/repository":/root/.m2/repository -v "$PWD/target:/usr/src/mymaven/target" -w /usr/src/mymaven virhuiai/maven_quick:latest mvn clean package  
 ```
 
 
@@ -55,3 +67,8 @@ $ docker run -it --rm -v "$PWD":/usr/src/mymaven -v "$HOME/.m2":/root/.m2 -v "$P
 -v 你的settings.xml路径:/usr/share/maven/conf/settings.xml
 ```
 
+# 例子
+
+```
+docker run -it --rm -v "$PWD":/usr/src/mymaven -v "$HOME/.m2/repository":/root/.m2/repository -v "$PWD/target:/usr/src/mymaven/target" -w /usr/src/mymaven virhuiai/maven_quick:latest mvn spring-boot:run
+```
